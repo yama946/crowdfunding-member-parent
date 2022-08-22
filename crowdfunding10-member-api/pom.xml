@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>crowdfunding-member-parent</artifactId>
+        <groupId>com.yama</groupId>
+        <version>1.1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>crowdfunding10-member-api</artifactId>
+
+
+    <!--主要用来配置远程调用接口-->
+    <dependencies>
+        <!--配置feign远程调用接口的依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--依赖工具类-->
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding11-member-common</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+        <!--依赖实体类-->
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding02-member-entity</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

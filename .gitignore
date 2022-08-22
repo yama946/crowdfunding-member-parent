@@ -1,0 +1,21 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# 本文件中内容，如果再提交一次版本后添加，添加的忽略内容在提交的版本中无效
+.idea
+*.iml
+# 也会会直接忽略target目录
+*/target/
+application-dev.yml

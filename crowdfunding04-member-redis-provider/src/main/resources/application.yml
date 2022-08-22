@@ -1,0 +1,27 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: crowd-redis
+  profiles:
+    active: dev
+    
+#配置eureka客户相关功能
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1000/eureka
+      
+#配置日志显示级别
+logging:
+  level:
+    com.yama.crowd: debug
+    
+#配置redis相关参数
+#spring:
+#  redis:
+#    host: ip地址
+#    port: 端口号
+#    password: 密码
+#    timeout: 延时
