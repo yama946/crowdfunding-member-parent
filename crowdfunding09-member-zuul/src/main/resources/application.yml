@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: crowd-zuul
+  session:
+    store-type: redis
+  profiles:
+    active: dev
 
 #配置eureka客户相关功能
 eureka:

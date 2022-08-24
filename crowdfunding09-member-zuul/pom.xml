@@ -12,6 +12,11 @@
     <artifactId>crowdfunding09-member-zuul</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding11-member-common</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
         <!--添加网关zuul依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -22,6 +27,18 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--分布式数据一致性session解决方案：springsession-->
+        <!-- 引入springboot&redis 整合场景-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- 引入springboot&springsession 整合场景-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <!--分布式数据一致性session解决方案：springsession-->
     </dependencies>
 
 </project>
