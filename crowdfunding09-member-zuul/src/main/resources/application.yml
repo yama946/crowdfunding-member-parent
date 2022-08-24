@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 80
 
 spring:
   application:
@@ -15,6 +15,19 @@ eureka:
 logging:
   level:
     com.yama.crowd: debug
-    
-    
 # 配置zuul的路由规则
+zuul:
+  routes:
+    auth:
+      service-id: crowd-auth
+      path: /**
+  ignored-services: '*'
+  sensitive-headers: '*'
+# 此处解决后端服务重定向导致用户浏览的 host 变成 后端服务的 host 问题
+  add-host-header: true
+  
+  
+#防止远程调用方法读取超时，连接超时
+ribbon:
+  ReadTimeout: 100000
+  ConnectTimeout: 100000

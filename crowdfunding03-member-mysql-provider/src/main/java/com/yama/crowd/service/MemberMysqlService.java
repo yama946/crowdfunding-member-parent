@@ -9,4 +9,6 @@ public interface MemberMysqlService {
      * @return
      */
     MemberPO getMemberPOByLoginAcct(String loginacct);
+
+    void saveMember(MemberPO memberPO);
 }

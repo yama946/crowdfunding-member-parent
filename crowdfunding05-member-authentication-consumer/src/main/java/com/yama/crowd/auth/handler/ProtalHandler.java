@@ -12,4 +12,6 @@ public class ProtalHandler {
         modelAndView.setViewName("protal");
         return modelAndView;
     }
+
+
 }
