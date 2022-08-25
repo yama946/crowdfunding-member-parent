@@ -2,6 +2,7 @@ package com.yama.crowd.handler;
 
 import com.yama.crowd.constant.CrowdConstant;
 import com.yama.crowd.entity.po.MemberPO;
+import com.yama.crowd.entity.vo.ProjectVO;
 import com.yama.crowd.service.MemberMysqlService;
 import com.yama.crowd.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,18 @@ public class MemberMysqlHandler {
             }
             return ResultUtil.fail(e.getMessage());
         }
+    }
+
+    /**
+     * 保存项目信息
+     * @param projectVO
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/save/projectvo/remote")
+    ResultUtil<String> saveProjectVORemote(@RequestBody ProjectVO projectVO, @RequestParam("memberId") Integer memberId){
+        //TODO 将项目信息保存到各个数据库表中
+        return null;
     }
 
 

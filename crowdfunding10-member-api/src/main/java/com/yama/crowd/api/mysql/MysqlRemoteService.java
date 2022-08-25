@@ -1,6 +1,7 @@
 package com.yama.crowd.api.mysql;
 
 import com.yama.crowd.entity.po.MemberPO;
+import com.yama.crowd.entity.vo.ProjectVO;
 import com.yama.crowd.util.ResultUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,4 +19,7 @@ public interface MysqlRemoteService {
 
     @RequestMapping("/save/member/remote")
     public ResultUtil<String> saveMember(@RequestBody MemberPO memberPO);
+
+    @RequestMapping("/save/projectvo/remote")
+    ResultUtil<String> saveProjectVORemote(@RequestBody ProjectVO projectVO, @RequestParam("memberId") Integer memberId);
 }

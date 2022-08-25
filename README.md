@@ -149,3 +149,9 @@ zuul:
 ### 注意点7：
 **分布式系统中，不是同一个项目的请求之间不能使用请求转发，必须使用请求重定向**
 **通过Spring session进行传递共享信息**
+
+### 注意点8：
+session与spring session使用区别
+session：session在内存中存放，我们从session中取出变量，进行修改，此时session由于是在内存中会自动改变
+spring session：存放在redis中，我们从spring session中去取出变量后修改，redis中存放的数据并不会自动修改，其内存并不归属java
+控制，所以需要我们再次进行重新设置，以保证下次数据取出的一致性。

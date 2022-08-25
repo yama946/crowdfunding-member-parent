@@ -17,5 +17,7 @@ public class CrowdWebMvcConfig implements WebMvcConfigurer {
         // 所以这个路径前面不加路由规则中定义的前缀：“/project”
         registry.addViewController("/agree/protocol/page").setViewName("project-agree");
         registry.addViewController("/launch/project/page").setViewName("project-launch");
+        registry.addViewController("/return/info/page").setViewName("project-return");
+        registry.addViewController("/create/confirm/page.html").setViewName("project-confirm");
     }
 }
