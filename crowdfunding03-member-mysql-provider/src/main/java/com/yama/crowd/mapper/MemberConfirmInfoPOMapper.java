@@ -3,9 +3,12 @@ package com.yama.crowd.mapper;
 import com.yama.crowd.entity.po.MemberConfirmInfoPO;
 import com.yama.crowd.entity.po.MemberConfirmInfoPOExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+@Repository
 public interface MemberConfirmInfoPOMapper {
     int countByExample(MemberConfirmInfoPOExample example);
 

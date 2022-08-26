@@ -3,10 +3,7 @@ package com.yama.crowd.project.handler;
 import com.yama.crowd.api.mysql.MysqlRemoteService;
 import com.yama.crowd.constant.CrowdConstant;
 import com.yama.crowd.constant.CrowdConstantSon;
-import com.yama.crowd.entity.vo.MemberConfirmInfoVO;
-import com.yama.crowd.entity.vo.MemberLoginVO;
-import com.yama.crowd.entity.vo.ProjectVO;
-import com.yama.crowd.entity.vo.ReturnVO;
+import com.yama.crowd.entity.vo.*;
 import com.yama.crowd.project.oss.OSSProperties;
 import com.yama.crowd.project.oss.OSSUploadUtile;
 import com.yama.crowd.util.ResultUtil;
@@ -197,9 +194,9 @@ public class ProjectConsumerHandler {
         // 3.将确认信息数据设置到 projectVO 对象中
         projectVO.setMemberConfirmInfoVO(memberConfirmInfoVO);
         // 4.从 Session 域读取当前登录的用户
-        MemberLoginVO memberLoginVO = (MemberLoginVO)
+        MemberVO memberVO = (MemberVO)
                 session.getAttribute(CrowdConstantSon.ATTR_NAME_LOGIN_MEMBER);
-        Integer memberId = memberLoginVO.getId();
+        Integer memberId = memberVO.getId();
         // 5.调用远程方法保存 projectVO 对象
         ResultUtil<String> saveResultEntity =
                 mysqlRemoteService.saveProjectVORemote(projectVO, memberId);
@@ -213,7 +210,7 @@ public class ProjectConsumerHandler {
         // 7.将临时的 ProjectVO 对象从 Session 域移除
         session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
         // 8.如果远程保存成功则跳转到最终完成页面
-        return "redirect:http://www.crowd.com/project/create/success";
+        return "redirect:/project/create/success";
     }
 
 }

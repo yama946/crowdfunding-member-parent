@@ -52,18 +52,4 @@ public class MemberMysqlHandler {
         }
     }
 
-    /**
-     * 保存项目信息
-     * @param projectVO
-     * @param memberId
-     * @return
-     */
-    @RequestMapping("/save/projectvo/remote")
-    ResultUtil<String> saveProjectVORemote(@RequestBody ProjectVO projectVO, @RequestParam("memberId") Integer memberId){
-        //TODO 将项目信息保存到各个数据库表中
-        return null;
-    }
-
-
-
 }

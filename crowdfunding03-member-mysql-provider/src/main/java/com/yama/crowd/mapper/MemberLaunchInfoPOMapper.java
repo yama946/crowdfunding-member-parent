@@ -3,9 +3,11 @@ package com.yama.crowd.mapper;
 import com.yama.crowd.entity.po.MemberLaunchInfoPO;
 import com.yama.crowd.entity.po.MemberLaunchInfoPOExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface MemberLaunchInfoPOMapper {
     int countByExample(MemberLaunchInfoPOExample example);
 

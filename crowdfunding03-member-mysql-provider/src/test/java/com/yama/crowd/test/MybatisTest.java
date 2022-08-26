@@ -43,6 +43,6 @@ public class MybatisTest {
         MemberPO memberPO = new MemberPO(null, "jack", password, "杰克",
                 "yanmu@163.com", 1, 1, "汤姆", "", null);
         int insert = memberPOMapper.insertSelective(memberPO);
-        System.out.println("影响的行数："+insert);
+        System.out.println("影响的行数："+memberPO.getId());
     }
 }

@@ -6,6 +6,7 @@ import com.netflix.zuul.exception.ZuulException;
 import com.yama.crowd.constant.CrowdConstant;
 import com.yama.crowd.constant.CrowdConstantSon;
 import com.yama.crowd.zuul.util.AccessPassResources;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.io.IOException;
  * 提供给zuulFilter使用。
  */
 @Component
+@Slf4j
 public class CrowdAccessFilter extends ZuulFilter {
     /**
      * 当前方法用来判断是否需要进行过滤
@@ -59,7 +61,7 @@ public class CrowdAccessFilter extends ZuulFilter {
         HttpServletRequest request = requestContext.getRequest();
         // 2.获取当前Session 对象
         HttpSession session = request.getSession();
-        // 3.尝试从Session 对象中获取已登录的用户
+        // 3.尝试从Session 对象中获取已登录的用户，反序列化需要依赖实体类
         Object loginMember = session.getAttribute(CrowdConstantSon.ACCT_NAME_LOGIN_MEMEBER);
         // 4.判断loginMember 是否为空
         if(loginMember == null) {
@@ -68,7 +70,7 @@ public class CrowdAccessFilter extends ZuulFilter {
             // 6.将提示消息存入Session 域
             session.setAttribute(CrowdConstantSon.ACCT_NAME_MESSAGE,
                     CrowdConstant.MESSAGE_ACCESS_FORBIDEN);
-                // 7.重定向到auth-consumer 工程中的登录页面
+            // 7.重定向到auth-consumer 工程中的登录页面
             try {
                 response.sendRedirect("/auth/member/to/login/page");
             } catch (IOException e) {

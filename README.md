@@ -155,3 +155,23 @@ session与spring session使用区别
 session：session在内存中存放，我们从session中取出变量，进行修改，此时session由于是在内存中会自动改变
 spring session：存放在redis中，我们从spring session中去取出变量后修改，redis中存放的数据并不会自动修改，其内存并不归属java
 控制，所以需要我们再次进行重新设置，以保证下次数据取出的一致性。
+
+
+### 注意点9：获取插入表中自动生成的主键id值----方式2
+<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.yama.crowd.entity.po.ProjectPO" >
+在配置文件中添加useGeneratedKeys="true" keyProperty="id"两个属性：
+useGeneratedKeys="true"：表示使用自动生成的主键
+keyProperty="id"：表示将自动生成的键值设置到对象中那个属性值中
+
+### 注意点10：经过zuul使用不同的域名会导致session与cookie失效
+window.location.href="http://localhost/project/launch/project/page";
+但是我们使用的www.lover.com域名就会导致session失效，需要重新登陆。
+
+### 注意点11：使用BeanUtils.copyProperties(memberVO,memberPO);类型不匹配
+```java
+    Long money;
+    Integer money;
+//两者类型不匹配导致，属性复制不成功
+属性不一致导致money没有存储到数据库中
+```
+### 思考1：mybatis存储时，属性类型和列类型不一致是否可以存储成功。

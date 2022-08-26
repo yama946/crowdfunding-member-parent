@@ -107,6 +107,22 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+    <insert id="insertReturnPOList">
+    insert into t_return ( projectid, type,
+      supportmoney, content, count,
+      signalpurchase, purchase, freight,
+      invoice, returndate, describ_pic_path
+      ) values
+      <foreach collection="returnPOList" item="retrunPO" separator=",">
+          (#{projectId,jdbcType=INTEGER}, #{retrunPO.type,jdbcType=INTEGER},
+          #{retrunPO.supportmoney,jdbcType=INTEGER}, #{retrunPO.content,jdbcType=VARCHAR},
+          #{retrunPO.count,jdbcType=INTEGER},#{retrunPO.signalpurchase,jdbcType=INTEGER},
+          #{retrunPO.purchase,jdbcType=INTEGER}, #{retrunPO.freight,jdbcType=INTEGER},
+          #{retrunPO.invoice,jdbcType=INTEGER}, #{retrunPO.returndate,jdbcType=INTEGER},
+           #{retrunPO.describPicPath,jdbcType=VARCHAR}
+          )
+      </foreach>
+    </insert>
   <insert id="insert" parameterType="com.yama.crowd.entity.po.ReturnPO" >
     insert into t_return (id, projectid, type, 
       supportmoney, content, count, 

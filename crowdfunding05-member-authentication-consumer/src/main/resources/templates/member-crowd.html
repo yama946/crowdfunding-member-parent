@@ -131,7 +131,15 @@
                             <script type="text/javascript">
                                 $(function () {
                                     $("#launchCrowdBtn").click(function () {
+                                        /*方案1*/
+                                        /*
                                         window.location.href="http://localhost/project/agree/protocol/page";
+                                        =
+                                        window.location.href=window.location.origin+"/project/agree/protocol/page";
+                                        */
+                                        /*方案2*/
+                                        window.location.href="/project/agree/protocol/page";
+
                                     });
                                 });
                             </script>

@@ -3,9 +3,11 @@ package com.yama.crowd.mapper;
 import com.yama.crowd.entity.po.ProjectPO;
 import com.yama.crowd.entity.po.ProjectPOExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProjectPOMapper {
     int countByExample(ProjectPOExample example);
 
@@ -28,4 +30,12 @@ public interface ProjectPOMapper {
     int updateByPrimaryKeySelective(ProjectPO record);
 
     int updateByPrimaryKey(ProjectPO record);
+
+    void insertProjectType(@Param("projectId") int projectId,@Param("typeIdList") List<Integer> typeIdList);
+
+    void insertProjectTag(@Param("projectId") int projectId, @Param("tagIdList") List<Integer> tagIdList);
+
+    void insertdetailPicturePathList(@Param("projectId") int projectId,
+                                     @Param("detailPicturePathList") List<String> detailPicturePathList);
+
 }

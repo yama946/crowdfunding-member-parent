@@ -3,13 +3,19 @@ package com.yama.crowd.service.impl;
 import com.yama.crowd.entity.po.MemberPO;
 import com.yama.crowd.entity.po.MemberPOExample;
 import com.yama.crowd.entity.po.MemberPOExample.*;
+import com.yama.crowd.entity.po.ProjectPO;
+import com.yama.crowd.entity.vo.ProjectVO;
 import com.yama.crowd.mapper.MemberPOMapper;
+import com.yama.crowd.mapper.ProjectPOMapper;
 import com.yama.crowd.service.MemberMysqlService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 //配置事务支持
 @Transactional(readOnly = true)
@@ -17,6 +23,7 @@ import java.util.List;
 public class MemberMysqlServiceImpl implements MemberMysqlService {
     @Autowired
     private MemberPOMapper memberPOMapper;
+
 
     @Override
     public MemberPO getMemberPOByLoginAcct(String loginacct) throws NullPointerException {
@@ -37,7 +44,10 @@ public class MemberMysqlServiceImpl implements MemberMysqlService {
     类上的事务管理是只读的，无法执行写操作。当前方法需要特有的事务设置，所以要重新设置事务特性。
      */
     @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public void saveMember(MemberPO memberPO) {
         memberPOMapper.insertSelective(memberPO);
     }
+
+
 }

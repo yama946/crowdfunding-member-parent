@@ -3,9 +3,11 @@ package com.yama.crowd.mapper;
 import com.yama.crowd.entity.po.ProjectItemPicPO;
 import com.yama.crowd.entity.po.ProjectItemPicPOExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProjectItemPicPOMapper {
     int countByExample(ProjectItemPicPOExample example);
 

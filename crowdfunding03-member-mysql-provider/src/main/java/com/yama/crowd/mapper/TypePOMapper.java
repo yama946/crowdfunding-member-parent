@@ -3,9 +3,11 @@ package com.yama.crowd.mapper;
 import com.yama.crowd.entity.po.TypePO;
 import com.yama.crowd.entity.po.TypePOExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TypePOMapper {
     int countByExample(TypePOExample example);
 

@@ -1,6 +1,7 @@
 package com.yama.crowd.service;
 
 import com.yama.crowd.entity.po.MemberPO;
+import com.yama.crowd.entity.vo.ProjectVO;
 
 public interface MemberMysqlService {
     /**

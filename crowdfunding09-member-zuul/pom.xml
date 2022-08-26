@@ -39,6 +39,12 @@
             <artifactId>spring-session-data-redis</artifactId>
         </dependency>
         <!--分布式数据一致性session解决方案：springsession-->
+        <!--依赖实体类-->
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding02-member-entity</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
     </dependencies>
 
 </project>

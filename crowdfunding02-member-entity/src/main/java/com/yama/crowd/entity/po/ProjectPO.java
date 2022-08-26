@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Accessors(chain = true)//链式风格，在调用set方法时，返回这个类的实例对象
 public class ProjectPO {
     private Integer id;
 
@@ -16,7 +18,9 @@ public class ProjectPO {
 
     private String projectDescription;
 
-    private Long money;
+    //类型匹配导致复制时，异常此值无法存放数据库
+//    private Long money;
+    private Integer money;
 
     private Integer day;
 
@@ -62,11 +66,11 @@ public class ProjectPO {
         this.projectDescription = projectDescription == null ? null : projectDescription.trim();
     }
 
-    public Long getMoney() {
+    public Integer getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 

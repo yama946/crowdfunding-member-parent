@@ -121,7 +121,32 @@
       #{completion,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{createdate,jdbcType=VARCHAR}, 
       #{follower,jdbcType=INTEGER}, #{headerPicturePath,jdbcType=VARCHAR})
   </insert>
+    <insert id="insertProjectType">
+        insert into t_project_type(projectid,typeid) values
+        <foreach collection="typeIdList" item="typeid" separator=",">
+            (#{projectId},#{typeid})
+        </foreach>
+    </insert>
+
+    <insert id="insertProjectTag">
+        insert into t_project_tag(projectid,tagid) values
+        <foreach collection="tagIdList" item="tagid" separator=",">
+            (#{projectId},#{tagid})
+        </foreach>
+    </insert>
+
+    <insert id="insertdetailPicturePathList">
+        insert into t_project_item_pic(projectid,item_pic_path) values
+        <foreach collection="detailPicturePathList" item="pic_path" separator=",">
+            (#{projectId},#{pic_path})
+        </foreach>
+    </insert>
+
   <insert id="insertSelective" parameterType="com.yama.crowd.entity.po.ProjectPO" >
+      <!--配置插入数据之后，获取插入数据的id值,keyPropertybean属性名，keyColumn列名，order执行顺序-->
+      <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+          select last_insert_id()
+      </selectKey>
     insert into t_project
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
