@@ -7,9 +7,12 @@ import com.yama.crowd.entity.vo.*;
 import com.yama.crowd.project.oss.OSSProperties;
 import com.yama.crowd.project.oss.OSSUploadUtile;
 import com.yama.crowd.util.ResultUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class ProjectConsumerHandler {
     @Autowired
     private OSSProperties ossProperties;
@@ -50,6 +54,7 @@ public class ProjectConsumerHandler {
                     CrowdConstantSon.MESSAGE_HEADER_PIC_EMPTY);
             return "project-launch";
         }
+        log.debug("头图片文件名:{}",headerPicture.getOriginalFilename());
         // 3.如果用户确实上传了有内容的文件，则执行上传
         ResultUtil<String> uploadHeaderPicResultEntity = OSSUploadUtile.uploadFileToOss(
                 ossProperties.getEndpoint(),
@@ -65,6 +70,7 @@ public class ProjectConsumerHandler {
         if(result) {
             // 5.如果成功则从返回的数据中获取图片访问路径
             String headerPicturePath = uploadHeaderPicResultEntity.getData();
+
             // 6.存入ProjectVO 对象中
             projectVO.setHeaderPicturePath(headerPicturePath);
         } else {
@@ -75,6 +81,7 @@ public class ProjectConsumerHandler {
         }
         // 二、上传详情图片
         // 1.创建一个用来存放详情图片路径的集合
+
         List<String> detailPicturePathList = new ArrayList<String>();
         // 2.检查detailPictureList 是否有效
         if(detailPictureList == null || detailPictureList.size() == 0) {
@@ -84,6 +91,7 @@ public class ProjectConsumerHandler {
         }
             // 3.遍历detailPictureList 集合
         for (MultipartFile detailPicture : detailPictureList) {
+            log.debug("详细信息当前文件名：{}",detailPicture.getOriginalFilename());
             // 4.当前detailPicture 是否为空
             if(detailPicture.isEmpty()) {
                 // 5.检测到详情图片中单个文件为空也是回去显示错误消息
@@ -96,10 +104,10 @@ public class ProjectConsumerHandler {
                     ossProperties.getEndpoint(),
                     ossProperties.getAccessKeyId(),
                     ossProperties.getAccessKeySecret(),
-                    headerPicture.getInputStream(),
+                    detailPicture.getInputStream(),
                     ossProperties.getBucketName(),
                     ossProperties.getBucketDomain(),
-                    headerPicture.getOriginalFilename(),
+                    detailPicture.getOriginalFilename(),
                     ossProperties.getObjectName());
             // 7.检查上传结果
             boolean detailUploadResult = detailUploadResultEntity.isResult();
@@ -211,6 +219,24 @@ public class ProjectConsumerHandler {
         session.removeAttribute(CrowdConstant.ATTR_NAME_TEMPLE_PROJECT);
         // 8.如果远程保存成功则跳转到最终完成页面
         return "redirect:/project/create/success";
+    }
+
+    /**
+     * 获取当前项目的详细信息
+     * @param projectId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/get/project/detail/{projectId}")
+    public String getProjectDetail(@PathVariable("projectId") Integer projectId, Model model) {
+        ResultUtil<DetailProjectVO> resultEntity =
+                mysqlRemoteService.getDetailProjectVORemote(projectId);
+        if(resultEntity.isResult()) {
+            DetailProjectVO detailProjectVO = resultEntity.getData();
+            log.debug("远程获取到的项目详细信息:{}",detailProjectVO);
+            model.addAttribute("detailProjectVO", detailProjectVO);
+        }
+        return "project-show-detail";
     }
 
 }

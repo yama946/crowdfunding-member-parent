@@ -6,6 +6,7 @@ import com.aliyun.oss.common.comm.ResponseMessage;
 import com.aliyun.oss.model.PutObjectResult;
 import com.netflix.discovery.converters.Auto;
 import com.yama.crowd.util.ResultUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+@Slf4j
 public class OSSUploadUtile {
 
     /**
@@ -55,6 +57,7 @@ public class OSSUploadUtile {
         try {
             // 调用OSS 客户端对象的方法上传文件并获取响应结果数据
             PutObjectResult putObjectResult = ossClient.putObject(bucketName, fileName,inputStream);
+            log.debug("上传后的返回值:{}",putObjectResult);
             // 从响应结果中获取具体响应消息
             ResponseMessage responseMessage = putObjectResult.getResponse();
             // 根据响应状态码判断请求是否成功

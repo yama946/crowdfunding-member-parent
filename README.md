@@ -175,3 +175,42 @@ window.location.href="http://localhost/project/launch/project/page";
 属性不一致导致money没有存储到数据库中
 ```
 ### 思考1：mybatis存储时，属性类型和列类型不一致是否可以存储成功。
+
+
+### 问题点12：mybatis一对多，多对多查询问题
+<association property="user" column="uid" javaType="user" select="com.yama.dao.IUserDao.findById"></association>
+对于属性select所指的方法，可以不在mapper中进行声明，直接在xml配置文件中配置即可。
+
+```xml
+<!--
+        注意：
+        方式1：
+        <resultMap id="accountuserMap" type="account">
+            <id property="id" column="aid"></id>
+            <result property="uid" column="uid"></result>
+            <result property="money" column="money"></result>
+            <association property="user" column="uid" javaType="user" select="com.yama.dao.IUserDao.findById"></association>
+        </resultMap>
+        这种方式进行获取联表查询数据，会将column属性中指定的列，作为参数传递给select中指定的方法，用来封装对象或者list集合后返回。
+        每查询到一个id封装一次，最终返回一个集合。
+        方式2：
+         <resultMap id="roleuserMap" type="role">
+            <id property="id" column="rid"></id>
+            <result property="roleName" column="role_name"></result>
+            <result property="roleDesc" column="role_desc"></result>
+            <collection property="users" ofType="user" >
+                <id property="id" column="id"></id>
+                <result property="username" column="username"></result>
+                <result property="birthday" column="birthday"></result>
+                <result property="sex" column="sex"></result>
+                <result property="address" column="address"></result>
+            </collection>
+        </resultMap>
+        这种方式的就是将联表数据查询得到一个表，将表中的数据封装到但resultmap中，直接返回结果
+-->
+```
+
+
+### 注意点15：mybatis字段映射问题
+username------>userName;window可以忽略大小写，直接映射userName,但是linux系统不行，区分大小写
+user_name----->userName;无法完成自动映射需要进行配置别名，或者resultMap

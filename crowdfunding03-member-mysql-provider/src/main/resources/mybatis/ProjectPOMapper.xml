@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yama.crowd.mapper.ProjectPOMapper" >
+    <resultMap type="com.yama.crowd.entity.vo.DetailProjectVO"
+               id="loadProjectDetailResultMap">
+        <id column="id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_description" property="projectDesc"/>
+        <result column="money" property="money"/>
+        <result column="status" property="status"/>
+        <result column="deployDate" property="deployDate"/>
+        <result column="day" property="day"/>
+        <result column="supportmoney" property="supportMoney"/>
+        <result column="follower" property="followerCount"/>
+        <result column="supporter" property="supporterCount"/>
+        <result column="header_picture_path" property="headerPicturePath"/>
+        <collection
+                property="detailPicturePathList"
+                select="com.yama.crowd.mapper.ProjectPOMapper.selectDetailPicturePath"
+                ofType="com.yama.crowd.entity.vo.DetailReturnVO"
+                column="id"/>
+        <collection
+                property="detailReturnVOList"
+                select="com.yama.crowd.mapper.ProjectPOMapper.selectDeatailReturnVO"
+                ofType="String"
+                column="id"/>
+    </resultMap>
+
+    <select id="selectDetailPicturePath" resultType="string">
+        SELECT item_pic_path FROM t_project_item_pic WHERE projectid=#{id}
+    </select>
+
+    <select id="selectDeatailReturnVO" resultType="com.yama.crowd.entity.vo.DetailReturnVO" parameterType="int">
+            select
+            id returnId,
+            supportmoney supportMoney,
+            content,
+            signalpurchase signalPurchase,
+            purchase,
+            freight,
+            returndate returnDate
+            from t_return
+            where projectid=#{id}
+    </select>
+
+    <select id="selectDetailProjectVO" parameterType="int" resultMap="loadProjectDetailResultMap">
+        select
+            id,
+            project_name,
+            project_description ,
+            money,
+            status,
+            day,
+            deploydate,
+            supportmoney,
+            supporter,
+            supportmoney/money*100 percentage,
+            follower,
+            header_picture_path
+        from t_project
+        where id=#{projectId}
+    </select>
+
+    <resultMap id="PortalVOResultMap" type="com.yama.crowd.entity.vo.PortalTypeVO">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="remark" column="remark"></result>
+        <collection property="portalProjectVOList" column="id" ofType="com.yama.crowd.entity.vo.PortalProjectVO"
+                    select="com.yama.crowd.mapper.ProjectPOMapper.selectProtalProjectVOList"></collection>
+    </resultMap>
+
+    <!--多表查找项目类型-->
+    <select id="selectPortalTypeVOList" resultMap="PortalVOResultMap">
+        select id,name,remark from t_type
+    </select>
+
+
+    <select id="selectProtalProjectVOList" resultType="PortalProjectVO" parameterType="int">
+        select
+        p.id projectId,
+        p.project_name projectName,
+        p.money,
+        p.deploydate deployDate,
+        p.supportmoney/money*100 percentage,
+        p.supporter supporter,
+        p.header_picture_path headerPicturePath
+        from t_project_type pt
+        join t_project p
+        on pt.projectid=p.id
+        where pt.typeid=#{id}
+        order by p.id desc
+        limit 0,4
+    </select>
+
   <resultMap id="BaseResultMap" type="com.yama.crowd.entity.po.ProjectPO" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="project_name" property="projectName" jdbcType="VARCHAR" />

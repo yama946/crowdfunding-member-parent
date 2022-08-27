@@ -2,6 +2,9 @@ package com.yama.crowd.mapper;
 
 import com.yama.crowd.entity.po.ProjectPO;
 import com.yama.crowd.entity.po.ProjectPOExample;
+import com.yama.crowd.entity.vo.DetailProjectVO;
+import com.yama.crowd.entity.vo.PortalProjectVO;
+import com.yama.crowd.entity.vo.PortalTypeVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -38,4 +41,9 @@ public interface ProjectPOMapper {
     void insertdetailPicturePathList(@Param("projectId") int projectId,
                                      @Param("detailPicturePathList") List<String> detailPicturePathList);
 
+    List<PortalTypeVO> selectPortalTypeVOList();
+
+    DetailProjectVO selectDetailProjectVO(Integer projectId);
+
+//    List<PortalProjectVO> selectProtalProjectVOList(Integer id);
 }

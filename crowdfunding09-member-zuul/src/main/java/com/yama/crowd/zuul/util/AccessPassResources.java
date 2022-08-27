@@ -21,6 +21,7 @@ public class AccessPassResources {
         PASS_RES_SET.add("/auth/member/do/login");
         PASS_RES_SET.add("/auth/do/member/register");
         PASS_RES_SET.add("/auth/member/send/short/message.json");
+        PASS_RES_SET.add("/project/get/project/detail/*");
     }
 
     public static final Set<String> STATIC_RES_SET = new HashSet<>();
