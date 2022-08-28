@@ -25,7 +25,9 @@ public class OrderVO implements Serializable {
     private String invoiceTitle;
     // 备注
     private String orderRemark;
-    private Integer addressId;
+
+    private String addressId;
+
     private OrderProjectVO orderProjectVO;
 
 }
