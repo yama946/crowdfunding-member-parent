@@ -39,6 +39,12 @@ zuul:
     project:
       service-id: crowd-project
       path: /project/**
+    order:
+      service-id: crowd-order
+      path: /order/**
+    pay:
+      service-id: crowd-pay
+      path: /pay/**
 
   
   

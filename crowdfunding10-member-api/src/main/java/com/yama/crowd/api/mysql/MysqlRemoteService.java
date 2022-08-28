@@ -1,9 +1,7 @@
 package com.yama.crowd.api.mysql;
 
 import com.yama.crowd.entity.po.MemberPO;
-import com.yama.crowd.entity.vo.DetailProjectVO;
-import com.yama.crowd.entity.vo.PortalTypeVO;
-import com.yama.crowd.entity.vo.ProjectVO;
+import com.yama.crowd.entity.vo.*;
 import com.yama.crowd.util.ResultUtil;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +30,17 @@ public interface MysqlRemoteService {
     ResultUtil<List<PortalTypeVO>> getPortalTypeRemote();
 
     @RequestMapping("/get/project/detail/remote/{projectId}")
-    public ResultUtil<DetailProjectVO> getDetailProjectVORemote(@PathVariable("projectId")
+    ResultUtil<DetailProjectVO> getDetailProjectVORemote(@PathVariable("projectId")
                                                                         Integer projectId);
+    @RequestMapping("/get/order/return/vo/remote")
+    ResultUtil<OrderProjectVO> getOrderProjectVoRemote(@RequestParam("returnId") Integer returnId);
+
+    @RequestMapping("/get/address/list/by/memeber/id/remote")
+    ResultUtil<List<AddressVO>> getAddressListByMemberIdRemote(@RequestParam("memberId") Integer memberId);
+
+    @RequestMapping("/save/address/remote")
+    void saveAddressRemote(@RequestBody AddressVO addressVO);
+
+    @RequestMapping("/save/order/remote")
+    ResultUtil<String> saveOrderRemote(@RequestBody OrderVO orderVO);
 }

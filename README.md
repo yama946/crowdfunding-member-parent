@@ -214,3 +214,10 @@ window.location.href="http://localhost/project/launch/project/page";
 ### 注意点15：mybatis字段映射问题
 username------>userName;window可以忽略大小写，直接映射userName,但是linux系统不行，区分大小写
 user_name----->userName;无法完成自动映射需要进行配置别名，或者resultMap
+
+
+### 注意点16：当一个微服务中添加静态资源，其他微服务就可以不用添加了，因为可以通过zuul直接访问其他微服务的static文件
+
+### 注意点17：对于远程服务接口中参数，对象需要添加@RequestBody注解，包装类等基本类型也需要添加@RequestParam注解
+
+### 注意点18：sql语句中字段上可以进行算数：加、减、乘、除；运算注意使用。

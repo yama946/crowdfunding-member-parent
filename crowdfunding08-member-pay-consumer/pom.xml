@@ -11,5 +11,69 @@
 
     <artifactId>crowdfunding08-member-pay-consumer</artifactId>
 
+    <dependencies>
+        <!--支付宝支付sdk-->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.3.49.ALL</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding10-member-api</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+        <!--配置注解ConfigurationProperties的执行器，不配置不影响使用但是会出现警告，配置yml时会给提示，需要配置的成员变量-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--将应用作为web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--将应用注册到eureka-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--集成thymeleaf视图模板-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!--依赖实体类-->
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding02-member-entity</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+        <!--依赖工具类-->
+        <dependency>
+            <groupId>com.yama</groupId>
+            <artifactId>crowdfunding11-member-common</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency>
+        <!-- SpringBoot 测试,使用junit4-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--分布式数据一致性session解决方案：springsession-->
+        <!-- 引入springboot&redis 整合场景-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- 引入springboot&springsession 整合场景-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <!--分布式数据一致性session解决方案：springsession-->
+    </dependencies>
 
 </project>

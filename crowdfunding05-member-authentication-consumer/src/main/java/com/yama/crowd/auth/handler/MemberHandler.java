@@ -171,6 +171,7 @@ public class MemberHandler {
         //将用户数据存放到session中
         MemberVO memberVO = new MemberVO(user.getId(), loginacct, userpswd,user.getUsername(),user.getEmail());
         session.setAttribute(CrowdConstantSon.ACCT_NAME_LOGIN_MEMEBER,memberVO);
+
         //此处应该重定向到会员中心页面
         return "redirect:/auth/member/to/center/page";
 

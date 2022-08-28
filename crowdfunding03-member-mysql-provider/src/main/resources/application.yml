@@ -22,7 +22,7 @@ eureka:
 #配置mybatsi的配置文件位置
 mybatis:
 #  配置xml配置文件中参数缩写
-  type-aliases-package: com.yama.crowd
+  type-aliases-package: com.yama.crowd.entity
 #  配置映射文件的位置
   mapper-locations: classpath*:/mybatis/*Mapper.xml
 
