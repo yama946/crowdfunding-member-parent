@@ -16,6 +16,8 @@ spring:
   #    配置session共享配置项
   session:
     store-type: redis
+  redis:
+    host: 127.0.0.1
 
 
 #配置eureka客户相关功能

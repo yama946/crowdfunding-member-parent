@@ -8,6 +8,8 @@ spring:
     store-type: redis
   profiles:
     active: dev
+  redis:
+    host: 127.0.0.1
 
 #配置eureka客户相关功能
 eureka:

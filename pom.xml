@@ -3,7 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <!--配置此依赖主要为了解决插件部分没有依赖版本控制，因为import方式引入只是引入dependencyManagement部分-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+    </parent>
 
     <groupId>com.yama</groupId>
     <artifactId>crowdfunding-member-parent</artifactId>
@@ -64,25 +69,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/application*.yml</include>
-                    <include>**/application*.yaml</include>
-                    <include>**/application*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>**/application*.yml</exclude>
-                    <exclude>**/application*.yaml</exclude>
-                    <exclude>**/application*.properties</exclude>
-                </excludes>
-            </resource>
-        </resources>
         <plugins>
             <!--绑定编译jdk版本-->
             <plugin>
