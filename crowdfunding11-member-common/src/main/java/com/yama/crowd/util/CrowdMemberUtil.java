@@ -1,11 +1,8 @@
 package com.yama.crowd.util;
 
-
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import com.yama.crowd.aliyun.api.HttpUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +11,6 @@ import java.util.Map;
  * 用来判断请求类型是，普通请求，还是json请求
  */
 public class CrowdMemberUtil {
-
-    static Logger logger = LoggerFactory.getLogger(CrowdMemberUtil.class);
     /**
      * 发送短信的工具类
      * @param host  短信api地址
@@ -72,7 +67,6 @@ public class CrowdMemberUtil {
             System.out.println(response.toString());
             //获取response的body
 //            System.out.println();
-            logger.debug("验证码发送成功");
             //输出结果为：{"msg":"成功","code":"0"}
             return ResultUtil.ok(response);
         } catch (Exception e) {

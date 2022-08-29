@@ -221,3 +221,49 @@ user_name----->userName;无法完成自动映射需要进行配置别名，或�
 ### 注意点17：对于远程服务接口中参数，对象需要添加@RequestBody注解，包装类等基本类型也需要添加@RequestParam注解
 
 ### 注意点18：sql语句中字段上可以进行算数：加、减、乘、除；运算注意使用。
+
+## 注意点19：解决执行java -jar xxx.jar出现no main manifest attribute异常
+异常如下：
+[root@VM-12-7-centos project-crowd-deploy]# java -jar crowdfunding01-member-eureka-1.1.0.RELEASE.jar 
+no main manifest attribute, in crowdfunding01-member-eureka-1.1.0.RELEASE.jar
+解决方案：
+添加如下配置：
+    <executions>
+        <execution>
+            <goals>
+                <goal>repackage</goal>
+                <goal>build-info</goal>
+            </goals>
+        </execution>
+    </executions>
+完整插件配置如下：
+```pom
+    <build>
+        <plugins>
+            <plugin>
+                <!--问题点-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+## 异常解决：
+启动异常
+```java
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'enableRedisKeyspaceNotificationsInitializer' defined in class path resource [org/springframework/boot/autoconfigure/session/RedisSessionConfiguration$SpringBootRedisHttpSessionConfiguration.class]: Invocation of init method failed; nested exception is org.springframework.data.redis.RedisSystemException: Error in execution; nested exception is io.lettuce.core.RedisCommandExecutionException: ERR unknown command `CONFIG`, with args beginning with: `GET`, `notify-keyspace-events`, 
+```
+
+异常说明中出现关键词：CONFIG,Netty，表示远程连接redis出现异常，执行CONFIG命令失败。
+解决方式：
+启用CONFIG命令：
+#rename-command CONFIG FRaqbC8wSA1XvpFVjCRGryWtIIZS2TRvpFVjCRG

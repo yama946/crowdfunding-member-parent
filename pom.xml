@@ -80,9 +80,14 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!--执行mvn install时出现无法执行maven-surefire-plugin异常，解决添加依赖-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
