@@ -223,6 +223,7 @@ user_name----->userName;无法完成自动映射需要进行配置别名，或�
 ### 注意点18：sql语句中字段上可以进行算数：加、减、乘、除；运算注意使用。
 
 ## 注意点19：解决执行java -jar xxx.jar出现no main manifest attribute异常
+* **注意：spring-boot-maven-plugin插件应该放到每个需要的项目中，不要放到父工程中会出现异常**
 异常如下：
 [root@VM-12-7-centos project-crowd-deploy]# java -jar crowdfunding01-member-eureka-1.1.0.RELEASE.jar 
 no main manifest attribute, in crowdfunding01-member-eureka-1.1.0.RELEASE.jar
